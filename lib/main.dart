@@ -14,7 +14,7 @@ void main() async {
       // プロバイダーを新しい値で上書き
       overrides: [
         themeModeProvider.overrideWith(
-          (ref) => initialThemeMode,
+          (ref) => ThemeModeNotifier(initialThemeMode),
         )
       ],
       child: const MyApp(),
@@ -27,11 +27,11 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(themeModeProvider);
+    final themeModeState = ref.watch(themeModeProvider);
     return MaterialApp(
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      themeMode: themeMode,
+      themeMode: themeModeState,
       home: const MainPage(),
     );
   }
